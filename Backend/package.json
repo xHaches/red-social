@@ -1,0 +1,32 @@
+{
+  "name": "red-social",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xHaches/red-social.git"
+  },
+  "author": "Luis Hernandez - Citlalli Chávez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xHaches/red-social/issues"
+  },
+  "homepage": "https://github.com/xHaches/red-social#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.26.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.12",
+    "sequelize": "^6.6.5",
+    "tedious": "^11.4.0"
+  }
+}
