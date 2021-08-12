@@ -2,7 +2,7 @@ const {DataTypes, Model} = require('sequelize')
 const sequelize = require('../db/connection')
 
 
-const Technologies = sequelize.define('Technologies', {
+const Technology = sequelize.define('Technologies', {
     id : {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -19,4 +19,4 @@ const Technologies = sequelize.define('Technologies', {
     updateAt: false
 })
 
-module.exports = Technologies;
+module.exports = Technology;

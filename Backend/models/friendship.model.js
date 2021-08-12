@@ -1,21 +1,16 @@
 const {DataTypes, Model} = require('sequelize')
-const sequelize = require('../db/conexion')
+const sequelize = require('../db/connection')
 
-
-const Qualification = sequelize.define('Qualification', {
+const Friendship = sequelize.define('Friendships', {
     id : {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    stars: {
-        type: DataTypes.DECIMAL(1,1),
-        allowNull: false,
-    },
-    id_technology : {
+    id_friend : {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Technologies',
+            model: 'Users',
             key: 'id'
         },
         allowNull: false,
@@ -28,6 +23,11 @@ const Qualification = sequelize.define('Qualification', {
         },
         allowNull: false,
     },
+    accepted : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
+
     
   },{
     timestamps: false,
@@ -35,4 +35,4 @@ const Qualification = sequelize.define('Qualification', {
     updateAt: false
 })
 
-module.exports = Qualification;
+module.exports = Friendship;
