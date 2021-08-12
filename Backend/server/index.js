@@ -5,6 +5,9 @@ const {v2: cloudinary} = require('cloudinary');
 const cloudinaryConfig = require('../cloudinary/config');
 const sequelize = require('../db/connection');
 
+
+const { userRoutes } = require('../routes');
+
 class Server {
 
     #app;
@@ -12,10 +15,7 @@ class Server {
     #host;
     // Ruta inicial
     #apiPaths = {
-        products: '/api/products',
         users: '/api/users',
-        auth: '/api/auth',
-        purchases: '/api/purchases'
     }
 
     constructor() {
@@ -45,7 +45,7 @@ class Server {
     }
 
     routes() {
-        
+       this.#app.use(this.#apiPaths.users, userRoutes); 
     }
 
     cloudinary() {
