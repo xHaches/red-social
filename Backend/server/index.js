@@ -6,7 +6,7 @@ const cloudinaryConfig = require('../cloudinary/config');
 const sequelize = require('../db/connection');
 
 
-const { userRoutes } = require('../routes');
+const { userRoutes, technologyRoutes } = require('../routes');
 
 class Server {
 
@@ -16,6 +16,7 @@ class Server {
     // Ruta inicial
     #apiPaths = {
         users: '/api/users',
+        techonologies: '/api/technologies'
     }
 
     constructor() {
@@ -46,6 +47,7 @@ class Server {
 
     routes() {
        this.#app.use(this.#apiPaths.users, userRoutes); 
+       this.#app.use(this.#apiPaths.techonologies, technologyRoutes); 
     }
 
     cloudinary() {
