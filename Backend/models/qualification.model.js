@@ -2,14 +2,14 @@ const {DataTypes, Model} = require('sequelize')
 const sequelize = require('../db/connection')
 
 
-const Qualification = sequelize.define('Qualification', {
+const Qualification = sequelize.define('Qualifications', {
     id : {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     stars: {
-        type: DataTypes.DECIMAL(1,1),
+        type: DataTypes.NUMBER(2,1),
         allowNull: false,
     },
     id_technology : {
