@@ -38,6 +38,11 @@ class UserController {
         const { img } = req.files;
         try {
             const user = await userService.newUser({ img, ...userData });
+            if(!user) {
+                return res.status(400).json({
+                    msg: 'El usuario con ese correo ya existe'
+                })
+            }
             await user.save();
             return res.json(user);
         } catch (err) {
