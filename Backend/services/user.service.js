@@ -1,6 +1,8 @@
 const { User } = require("../models");
 const { ImgService } = require("./img.service");
 
+const bcryptjs = require('bcryptjs');
+
 
 const imgService = new ImgService();
 
@@ -30,6 +32,10 @@ class UserService {
 
     async newUser ({ img, name, address, email, password, age, studies, languages, linkedin, hobbies }) {
         const imgUrl = await imgService.newImage({img});
+        const userExists = await this.getUserByEmail({email});
+        if(userExists) {
+            return;
+        }
         const user = await User.create({
             img: imgUrl, 
             name, 
@@ -44,7 +50,10 @@ class UserService {
             role: 'USER', 
             status: 1
         });
+        const salt = bcryptjs.genSaltSync(10);
+        user.password = bcryptjs.hashSync(password, salt);
         await user.save();
+        delete user.dataValues.password;
         return user;
     }
 
