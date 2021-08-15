@@ -14,13 +14,6 @@ class UserService {
                 status: 1
             }
         });
-        if(!users) {
-            return {
-                error: true,
-                msg: 'No se logró encontrar ningun usuario',
-                status: 400
-            };
-        }
         return users;
     }
 
@@ -55,7 +48,11 @@ class UserService {
         const imgUrl = await imgService.newImage({img});
         const userExists = await this.getUserByEmail({email});
         if(userExists) {
-            return;
+            return {
+                error: true,
+                msg: 'El usuario con ese correo ya existe',
+                status: 400
+            };
         }
         const user = await User.create({
             img: imgUrl, 
@@ -84,8 +81,12 @@ class UserService {
         // Evitar que se cambien los roles y se desactiven cuentas
         const { role, status, ...rest } = body;
         const user = await User.findByPk(id);
-        if (!user.status || !user){
-            return;
+        if (!user || !user.status){
+            return {
+                error: true,
+                msg: 'No se logró encontrar ningun usuario',
+                status: 400
+            };
         }
         // Si existe la img se actualiza con img en otro caso solo los de más campos
         if(img){
@@ -99,8 +100,12 @@ class UserService {
 
     async deleteUser({ id }) {
         const user = await User.findByPk(id);
-        if (!user.status || !user){
-            return;
+        if (!user || !user.status){
+            return {
+                error: true,
+                msg: 'No se logró encontrar ningun usuario',
+                status: 400
+            };
         }
         // Status 0 eliminado, Status 1 Activado
         await user.update({ status: 0 });

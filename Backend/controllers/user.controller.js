@@ -8,9 +8,6 @@ class UserController {
     async getUsers(req, res) {
         try{
             const users = await userService.getUsers();
-            if(users.error){
-                return res.status(users.status).json({msg: users.msg});
-            }
             return res.json(users);
         } catch(err){
             console.log(err);
@@ -41,9 +38,9 @@ class UserController {
         const { img } = req.files;
         try {
             const user = await userService.newUser({ img, ...userData });
-            if(!user) {
-                return res.status(400).json({
-                    msg: 'El usuario con ese correo ya existe'
+            if(user.error) {
+                return res.status(user.status).json({
+                    msg: user.msg
                 })
             }
             await user.save();
@@ -62,8 +59,8 @@ class UserController {
         const { img } = req.files;
         try {
             const user = await userService.putUser({ id, body: userData, img });
-            if (!user) {
-                return res.status(400).json({ msg: 'Usuario no encontrado' });
+            if (user.error) {
+                return res.status(400).json({ msg: user.msg });
             }
             return res.json(user);
         } catch (err) {
@@ -78,8 +75,8 @@ class UserController {
         const { id } = req.params;
         try {
             const user = await userService.deleteUser({ id });
-            if (!user) {
-                return res.status(400).json({ msg: 'Usuario no encontrado' });
+            if (user.error) {
+                return res.status(user.status).json({ msg: user.msg });
             }
             return res.json(user);
         } catch (err) {
