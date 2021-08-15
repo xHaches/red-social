@@ -21,8 +21,8 @@ class FriendshipController {
         const { id } = req.params;
         try {
             const friendship = await friendshipService.getFriendshipByPK({id});
-            if (!friendship) {
-                return res.status(400).json({ msg: 'Amistad no encontrada' });
+            if(friendship.error){
+                return res.status(friendship.status).json({msg: friendship.msg});
             }
             return res.json(friendship);
         } catch(err){
@@ -39,6 +39,9 @@ class FriendshipController {
        
         try {
             const friendship = await friendshipService.newFriendship({ id_user , id_friend, accepted   });
+            if(friendship.error){
+                return res.status(friendship.status).json({msg: friendship.msg});
+            }
             await friendship.save();
             return res.json(friendship);
         } catch (err) {
@@ -70,8 +73,8 @@ class FriendshipController {
         const { id } = req.params;
         try {
             const friendship = await friendshipService.deleteFriendship({ id });
-            if (!friendship) {
-                return res.status(400).json({ msg: 'Amistad no encontrada' });
+            if(friendship.error){
+                return res.status(friendship.status).json({msg: friendship.msg});
             }
             return res.json(friendship);
         } catch (err) {

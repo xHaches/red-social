@@ -12,6 +12,13 @@ class QualificationService {
 
     async getQualificationByPK({ id }) {
         const qualification = await Qualification.findByPk(id);
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar la calificación solicitada',
+                status: 400
+            };
+        }
         return qualification; 
     }
     //buscar por id
@@ -19,6 +26,13 @@ class QualificationService {
         const qualification = await Qualification.findOne({
             where: { id }
         });
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar la calificación solicitada',
+                status: 400
+            };
+        }
         return qualification;
     }
   
@@ -36,6 +50,13 @@ class QualificationService {
             id_user,
             id_technology
         });
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró procesar la alta de la calificación ',
+                status: 500
+            };
+        }
         await qualification.save();
         return qualification;
     }
@@ -43,15 +64,27 @@ class QualificationService {
     async putQualification({ id, body }) {
         const { stars } = body;
         const qualification = await Qualification.findByPk(id);
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar la calificación solicitada',
+                status: 400
+            };
+        }
         await qualification.update({ stars });
         return qualification;
     }
 
     async deleteQualification({ id }) {
         const qualification = await Qualification.findByPk(id);
-        if (!qualification.stars || !qualification){
-            return;
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar la calificación solicitada',
+                status: 400
+            };
         }
+
         await qualification.update({ stars: 0 });
         return qualification;
     }

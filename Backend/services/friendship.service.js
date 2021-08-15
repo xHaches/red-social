@@ -14,6 +14,13 @@ class FriendshipService {
 
     async getFriendshipByPK({ id }) {
         const friendship = await Friendship.findByPk(id);
+        if(!friendship) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar peticion solicitada',
+                status: 400
+            };
+        }
         return friendship; 
     }
 
@@ -22,6 +29,13 @@ class FriendshipService {
         const friendship = await Friendship.findOne({
             where: { id_user }
         });
+        if(!friendship) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar peticion solicitada',
+                status: 400
+            };
+        }
         return friendship;
     }
 
@@ -31,6 +45,13 @@ class FriendshipService {
             id_user,
             id_friend
         });
+        if(!friendship) {
+            return {
+                error: true,
+                msg: 'No se logró la alta de la peticion solicitada',
+                status: 400
+            };
+        }
         await friendship.save();
         return friendship;
     }
@@ -38,14 +59,25 @@ class FriendshipService {
     async putFriendship({ id, body }) {
         const { accepted } = body;
         const friendship = await Friendship.findByPk(id);
+        if(!friendship) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar peticion solicitada',
+                status: 400
+            };
+        }
         await friendship.update({ accepted });
         return friendship;
     }
 
     async deleteFriendship({ id }) {
         const friendship = await Friendship.findByPk(id);
-        if (!friendship.accepted || !friendship){
-            return;
+        if(!friendship) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar peticion solicitada',
+                status: 400
+            };
         }
         await friendship.update({ accepted:false });
         return friendship;

@@ -12,7 +12,11 @@ class AuthService {
         const validPassword = bcryptjs.compareSync(password+'', user.password);
 
         if(!validPassword) {
-            return;
+            return {
+                error: true,
+                msg: 'Email o password incorrectos',
+                status: 400
+            }
         }
         delete user.dataValues.password;
 
