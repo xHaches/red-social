@@ -8,6 +8,9 @@ class UserController {
     async getUsers(req, res) {
         try{
             const users = await userService.getUsers();
+            if(users.error){
+                return res.status(users.status).json({msg: users.msg});
+            }
             return res.json(users);
         } catch(err){
             console.log(err);
@@ -21,8 +24,8 @@ class UserController {
         const { id } = req.params;
         try {
             const user = await userService.getUserByPK({id});
-            if (!user) {
-                return res.status(400).json({ msg: 'Usuario no encontrado' });
+            if(user.error){
+                return res.status(user.status).json({msg: user.msg});
             }
             return res.json(user);
         } catch(err){

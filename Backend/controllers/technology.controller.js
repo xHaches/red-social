@@ -21,9 +21,10 @@ class TechnologyController {
         const { id } = req.params;
         try {
             const technology = await technologyService.getTechnologyByPK({id});
-            if (!technology) {
-                return res.status(400).json({ msg: 'Tecnología no encontrada' });
+            if(technology.error){
+                return res.status(technology.status).json({msg: technology.msg});
             }
+            
             return res.json(technology);
         } catch(err){
             console.log(err);
@@ -38,6 +39,9 @@ class TechnologyController {
         
         try {
             const technology = await technologyService.newTechnology({ title });
+            if(technology.error){
+                return res.status(technology.status).json({msg: technology.msg});
+            }
             await technology.save();
             return res.json(technology);
         } catch (err) {
@@ -53,8 +57,8 @@ class TechnologyController {
         const { title } = req.body;
         try {
             const technology = await technologyService.putTechnology({ id, title });
-            if (!technology) {
-                return res.status(400).json({ msg: 'Tecnología no encontrada' });
+            if(technology.error){
+                return res.status(technology.status).json({msg: technology.msg});
             }
             return res.json(technology);
         } catch (err) {
@@ -69,8 +73,8 @@ class TechnologyController {
         const { id } = req.params;
         try {
             const technology = await technologyService.deleteTechnology({ id });
-            if (!technology) {
-                return res.status(400).json({ msg: 'Tecnología no encontrada' });
+            if(technology.error){
+                return res.status(technology.status).json({msg: technology.msg});
             }
             return res.json(technology);
         } catch (err) {

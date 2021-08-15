@@ -14,11 +14,25 @@ class UserService {
                 status: 1
             }
         });
+        if(!users) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar ningun usuario',
+                status: 400
+            };
+        }
         return users;
     }
 
     async getUserByPK({ id }) {
         const user = await User.findByPk(id);
+        if(!user) {
+            return {
+                error: true,
+                msg: 'No se logró encontrar ningun usuario',
+                status: 400
+            };
+        }
         return user.status ? user : null; 
     }
 
@@ -27,6 +41,13 @@ class UserService {
         const user = await User.findOne({
             where: { email }
         });
+        if(!user) {
+            return {
+                error: true,
+                msg: 'Email o password son incorrectos',
+                status: 400
+            };
+        }
         return user;
     }
 
@@ -50,6 +71,7 @@ class UserService {
             role: 'USER', 
             status: 1
         });
+        
         const salt = bcryptjs.genSaltSync(10);
         user.password = bcryptjs.hashSync(password, salt);
         await user.save();

@@ -35,8 +35,8 @@ class QualificationController {
         const { id } = req.params;
         try {
             const qualification = await qualificationService.getQualificationByPK({id});
-            if (!qualification) {
-                return res.status(400).json({ msg: 'Calificacion no encontrado' });
+            if(qualification.error){
+                return res.status(qualification.status).json({msg: qualification.msg});
             }
             return res.json(qualification);
         } catch(err){
@@ -52,6 +52,9 @@ class QualificationController {
         const { stars }   = req.body;
         try {
             const qualification = await qualificationService.newQualification({ id_user, id_technology, stars });
+            if(qualification.error){
+                return res.status(qualification.status).json({msg: qualification.msg});
+            }
             await qualification.save();
             return res.json(qualification);
         } catch (err) {
@@ -67,8 +70,8 @@ class QualificationController {
         const qualificationData = req.body;
         try {
             const qualification = await qualificationService.putQualification({ id, body: qualificationData});
-            if (!qualification) {
-                return res.status(400).json({ msg: 'Calificacion no encontrado' });
+            if(qualification.error){
+                return res.status(qualification.status).json({msg: qualification.msg});
             }
             return res.json(qualification);
         } catch (err) {
@@ -83,8 +86,8 @@ class QualificationController {
         const { id } = req.params;
         try {
             const qualification = await qualificationService.deleteQualification({ id });
-            if (!qualification) {
-                return res.status(400).json({ msg: 'Calificacion no encontrada' });
+            if(qualification.error){
+                return res.status(qualification.status).json({msg: qualification.msg});
             }
             return res.json(qualification);
         } catch (err) {
