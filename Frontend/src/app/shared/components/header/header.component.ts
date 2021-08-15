@@ -4,6 +4,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 
 
 import Swal from 'sweetalert2';
+import { StateService } from '../../../state/services/state.service';
 
 
 @Component({
@@ -12,10 +13,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   constructor(
     private localStorageService: LocalStorageService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private stateService: StateService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -42,9 +45,11 @@ export class HeaderComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.stateService.dispatchAction('setUser', {});
+        this.stateService.dispatchAction('setToken', '');
         this.localStorageService.removeItem('token');
         this.localStorageService.removeItem('user');
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('/login');
       }
     });
 
