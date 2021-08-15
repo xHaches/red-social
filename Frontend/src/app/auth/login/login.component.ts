@@ -5,6 +5,8 @@ import { AuthService } from '../auth.service';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
 
 import Swal from 'sweetalert2';
+import { StateService } from '../../state/services/state.service';
+import { Session } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private stateService: StateService
   ) { }
 
   invalidEmail(): boolean {
@@ -44,7 +47,7 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return; 
     }
-    this.authService.login(this.loginForm.value).subscribe((session: any): any => {
+    this.authService.login(this.loginForm.value).subscribe((session: Session): any => {
       if(session.error){
         return Swal.fire(session.error.msg);
       }
@@ -54,6 +57,9 @@ export class LoginComponent {
         showConfirmButton: false,
         timer: 1500
       }).then( _ => {
+        this.stateService.dispatchAction('setUser', session.user);
+        this.stateService.dispatchAction('setToken', session.token);
+        
         this.localStorageService.setItem('user', session.user);
         this.localStorageService.setItem('token', session.token);
         this.router.navigate(['profile'])

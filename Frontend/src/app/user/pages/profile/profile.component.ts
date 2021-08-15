@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from '../../../state/services/state.service';
+import { User } from '../../../interfaces/user.interface';
+import { State } from '../../../interfaces/state.interface';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private stateService: StateService
+  ) { }
+
+  user!: User;
 
   ngOnInit(): void {
+    this.stateService.subscribe((state: State) => {
+      this.user = state.user;
+      console.log(this.user);
+    });
   }
 
 }
