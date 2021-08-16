@@ -15,6 +15,8 @@ export class StateService {
       img: '',
       name: '',
       email: '',
+      address: '',
+      languages: '',
       age: 0,
       studies: '',
       linkedin: '',

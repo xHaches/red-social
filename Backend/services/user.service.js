@@ -19,14 +19,14 @@ class UserService {
 
     async getUserByPK({ id }) {
         const user = await User.findByPk(id);
-        if(!user) {
+        if(!user || !user.status) {
             return {
                 error: true,
                 msg: 'No se logró encontrar ningun usuario',
                 status: 400
             };
         }
-        return user.status ? user : null; 
+        return user; 
     }
 
     // Siempre usar argumentos por nombre, (con llaves)
@@ -34,7 +34,8 @@ class UserService {
         const user = await User.findOne({
             where: { email }
         });
-        if(!user) {
+        console.log(user);
+        if(!user || !user.status) {
             return {
                 error: true,
                 msg: 'Email o password son incorrectos',
@@ -44,16 +45,19 @@ class UserService {
         return user;
     }
 
-    async newUser ({ img, name, address, email, password, age, studies, languages, linkedin, hobbies }) {
-        const imgUrl = await imgService.newImage({img});
+    async newUser (img, { name, address, email, password, age, studies, languages, linkedin, hobbies }) {
         const userExists = await this.getUserByEmail({email});
-        if(userExists) {
+        console.log(userExists);
+        console.log(!!userExists);
+        console.log(!userExists.error);
+        if(!userExists.error) {
             return {
                 error: true,
-                msg: 'El usuario con ese correo ya existe',
+                msg: 'El usuario con ese E-mail ya existe',
                 status: 400
             };
         }
+        const imgUrl = await imgService.newImage({img});
         const user = await User.create({
             img: imgUrl, 
             name, 
@@ -76,10 +80,10 @@ class UserService {
         return user;
     }
 
-    async putUser({ id, body, img = null }) {
+    async putUser(img, { id, body }) {
         // Obtener la img y los de mas campos por separado
         // Evitar que se cambien los roles y se desactiven cuentas
-        const { role, status, ...rest } = body;
+        const { role, status, password, ...rest } = body;
         const user = await User.findByPk(id);
         if (!user || !user.status){
             return {
@@ -94,7 +98,11 @@ class UserService {
             await user.update({ ...rest, img: imgUrl });
             return user;
         }
-        await user.update({ ...rest });
+        if(password === '123456'){
+            await user.update({ ...rest });
+            return user;
+        }
+        await user.update({ ...rest, password });
         return user;
     }
 

@@ -15,7 +15,7 @@ class ImgService {
             const [public_id] = name.split('.');
             cloudinary.uploader.destroy('social-network/'+public_id);
         }
-        const secureUrl = await this.newImage(img);
+        const secureUrl = await this.newImage({img});
         return secureUrl;
     }
 }

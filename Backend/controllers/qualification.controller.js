@@ -13,7 +13,7 @@ class QualificationController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -36,13 +36,13 @@ class QualificationController {
         try {
             const qualification = await qualificationService.getQualificationByPK({id});
             if(qualification.error){
-                return res.status(qualification.status).json({msg: qualification.msg});
+                return res.status(qualification.status).json({error: qualification.msg});
             }
             return res.json(qualification);
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -53,14 +53,14 @@ class QualificationController {
         try {
             const qualification = await qualificationService.newQualification({ id_user, id_technology, stars });
             if(qualification.error){
-                return res.status(qualification.status).json({msg: qualification.msg});
+                return res.status(qualification.status).json({error: qualification.msg});
             }
             await qualification.save();
             return res.json(qualification);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -71,13 +71,13 @@ class QualificationController {
         try {
             const qualification = await qualificationService.putQualification({ id, body: qualificationData});
             if(qualification.error){
-                return res.status(qualification.status).json({msg: qualification.msg});
+                return res.status(qualification.status).json({error: qualification.msg});
             }
             return res.json(qualification);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -87,13 +87,13 @@ class QualificationController {
         try {
             const qualification = await qualificationService.deleteQualification({ id });
             if(qualification.error){
-                return res.status(qualification.status).json({msg: qualification.msg});
+                return res.status(qualification.status).json({error: qualification.msg});
             }
             return res.json(qualification);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }

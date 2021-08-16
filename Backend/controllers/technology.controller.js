@@ -12,7 +12,7 @@ class TechnologyController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -22,14 +22,14 @@ class TechnologyController {
         try {
             const technology = await technologyService.getTechnologyByPK({id});
             if(technology.error){
-                return res.status(technology.status).json({msg: technology.msg});
+                return res.status(technology.status).json({error: technology.msg});
             }
             
             return res.json(technology);
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -40,14 +40,14 @@ class TechnologyController {
         try {
             const technology = await technologyService.newTechnology({ title });
             if(technology.error){
-                return res.status(technology.status).json({msg: technology.msg});
+                return res.status(technology.status).json({error: technology.msg});
             }
             await technology.save();
             return res.json(technology);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -58,13 +58,13 @@ class TechnologyController {
         try {
             const technology = await technologyService.putTechnology({ id, title });
             if(technology.error){
-                return res.status(technology.status).json({msg: technology.msg});
+                return res.status(technology.status).json({error: technology.msg});
             }
             return res.json(technology);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -74,13 +74,13 @@ class TechnologyController {
         try {
             const technology = await technologyService.deleteTechnology({ id });
             if(technology.error){
-                return res.status(technology.status).json({msg: technology.msg});
+                return res.status(technology.status).json({error: technology.msg});
             }
             return res.json(technology);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
