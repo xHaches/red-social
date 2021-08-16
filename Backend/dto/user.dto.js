@@ -12,6 +12,7 @@ class UserDTO {
         languages: Joi.string().min(6).max(50).required(),
         linkedin: Joi.string().required(),
         hobbies: Joi.string().min(6).max(50).required(),
+        img: Joi.optional(),
     });
     put = Joi.object().keys({
         name: Joi.string().max(50),
@@ -23,6 +24,7 @@ class UserDTO {
         languages: Joi.string().min(6).max(50),
         linkedin: Joi.string(),
         hobbies: Joi.string().min(6).max(50),
+        img: Joi.optional(),
     });
 }
 

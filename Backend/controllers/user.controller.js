@@ -12,7 +12,7 @@ class UserController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -22,13 +22,13 @@ class UserController {
         try {
             const user = await userService.getUserByPK({id});
             if(user.error){
-                return res.status(user.status).json({msg: user.msg});
+                return res.status(user.status).json({error: user.msg});
             }
             return res.json(user);
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -37,10 +37,10 @@ class UserController {
         const userData = req.body;
         const { img } = req.files;
         try {
-            const user = await userService.newUser({ img, ...userData });
+            const user = await userService.newUser(img, { ...userData });
             if(user.error) {
                 return res.status(user.status).json({
-                    msg: user.msg
+                    error: user.msg
                 })
             }
             await user.save();
@@ -48,7 +48,7 @@ class UserController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -58,15 +58,15 @@ class UserController {
         const userData = req.body;
         const { img } = req.files;
         try {
-            const user = await userService.putUser({ id, body: userData, img });
+            const user = await userService.putUser(img, { id, body: userData });
             if (user.error) {
-                return res.status(400).json({ msg: user.msg });
+                return res.status(400).json({ error: user.msg });
             }
             return res.json(user);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -76,13 +76,13 @@ class UserController {
         try {
             const user = await userService.deleteUser({ id });
             if (user.error) {
-                return res.status(user.status).json({ msg: user.msg });
+                return res.status(user.status).json({ error: user.msg });
             }
             return res.json(user);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }

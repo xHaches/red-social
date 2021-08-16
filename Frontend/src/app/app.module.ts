@@ -12,6 +12,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenService } from './shared/interceptors/token.service';
 import { ProfileComponent } from './user/pages/profile/profile.component';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { FileValueAccessorDirective } from './shared/directives/form/file-value-accessor.directive';
+import { FileValidatorDirective } from './shared/directives/form/file-validator.directive';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    FileValueAccessorDirective,
+    FileValidatorDirective,
   ],
   imports: [
     BrowserModule,

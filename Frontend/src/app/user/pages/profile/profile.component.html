@@ -1,1 +1,176 @@
-<p>profile works!</p>
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Iniciar Sesión</h1>
+        </div>
+        <form class="lg:w-1/2 md:w-2/3 mx-auto" autocomplete="off" [formGroup]="updateForm" (ngSubmit)="updateUser()" encType="multipart/form-data">
+            <div class="flex flex-wrap m-2">
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="email" class="leading-7 text-sm text-gray-600">E-mail</label>
+                    <input type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="email">
+                    <!-- CUANDO EL EMAIL NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidEmail()">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Email no válido.</span>
+                        </div>
+                    <!-- CUANDO EL EMAIL ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('email')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="name" class="leading-7 text-sm text-gray-600">Nombre</label>
+                    <input type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="name">
+                    <!-- CUANDO EL NOMBRE NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('name')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres)</span>
+                        </div>
+                    <!-- CUANDO EL NOMBRE ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('name')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="address" class="leading-7 text-sm text-gray-600">Dirección</label>
+                    <input type="text" id="address" name="address" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="address">
+                    <!-- CUANDO LA DIRECCIÓN NO ES VALIDA -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('address')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres)</span>
+                        </div>
+                    <!-- CUANDO LA DIRECCIÓN ES REQUERIDA -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('address')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="age" class="leading-7 text-sm text-gray-600">Edad</label>
+                    <input type="number" id="age" name="age" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" max="200" formControlName="age">
+                    <!-- CUANDO LA DIRECCIÓN NO ES VALIDA -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidAge()">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Edad no válida.</span>
+                        </div>
+                    <!-- CUANDO LA DIRECCIÓN ES REQUERIDA -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('age')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="studies" class="leading-7 text-sm text-gray-600">Estudios</label>
+                    <input type="text" id="studies" name="studies" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="studies">
+                    <!-- CUANDO EL CAMPO NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('studies')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres)</span>
+                        </div>
+                    <!-- CUANDO EL CAMPO ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('studies')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="languages" class="leading-7 text-sm text-gray-600">Idiomas</label>
+                    <input type="text" id="languages" name="languages" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="languages">
+                    <!-- CUANDO EL CAMPO NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('languages')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres)</span>
+                        </div>
+                    <!-- CUANDO EL CAMPO ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('languages')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="linkedin" class="leading-7 text-sm text-gray-600">Linkedin</label>
+                    <input type="text" id="linkedin" name="linkedin" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="linkedin">
+                    <!-- CUANDO EL CAMPO NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('linkedin')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido.</span>
+                        </div>
+                    <!-- CUANDO EL CAMPO ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('linkedin')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="hobbies" class="leading-7 text-sm text-gray-600">Hobbies</label>
+                    <input type="text" id="hobbies" name="hobbies" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="hobbies">
+                    <!-- CUANDO EL CAMPO NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('hobbies')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres).</span>
+                        </div>
+                    <!-- CUANDO EL CAMPO ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('hobbies')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="img" class="leading-7 text-sm text-gray-600">Foto de perfil</label>
+                    <input type="file" id="img" name="img" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="img" (change)="onFileChange($event)" #fileInput>
+                    <!-- CUANDO EL CAMPO ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidImg()">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                    <div class="p-2 w-full" *ngIf="preview">
+                        <img [src]="preview" alt="">
+                    </div>
+                    <div class="p-2 w-full" *ngIf="!preview">
+                        <img [src]="user.img" alt="">
+                    </div>
+                </div>
+                <div class="p-2 w-full">
+                    <div class="relative">
+                    <label for="password" class="leading-7 text-sm text-gray-600">Password</label>
+                    <input type="password" id="password" name="password" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" formControlName="password">
+
+                        <!-- CUANDO EL PASSWORD NO ES VALIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="invalidMinLength('password')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo no válido. (minimo 6 caracteres).</span>
+                        </div>
+                        <!-- CUANDO EL PASSWORD ES REQUERIDO -->
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 m-3 rounded relative" role="alert" *ngIf="inputRequired('password')">
+                            <strong class="font-bold">Error... </strong>
+                            <span class="block sm:inline">Campo requerido.</span>
+                        </div>
+                    </div>
+                </div>
+            <div class="p-2 w-full">
+                <button class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">Guardar</button>
+            </div>
+            </div>
+        </form>
+    </div>
+  </section>

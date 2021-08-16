@@ -24,6 +24,12 @@ export class AuthService {
     );
   }
 
+  register(form: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/users`, form).pipe(
+      catchError(err => of(err))
+    );
+  }
+
   validateToken() {
     return this.http.get<any>(`${this.baseUrl}/auth/refresh`);
   }

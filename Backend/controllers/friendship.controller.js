@@ -12,7 +12,7 @@ class FriendshipController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -22,13 +22,13 @@ class FriendshipController {
         try {
             const friendship = await friendshipService.getFriendshipByPK({id});
             if(friendship.error){
-                return res.status(friendship.status).json({msg: friendship.msg});
+                return res.status(friendship.status).json({error: friendship.msg});
             }
             return res.json(friendship);
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -40,14 +40,14 @@ class FriendshipController {
         try {
             const friendship = await friendshipService.newFriendship({ id_user , id_friend, accepted   });
             if(friendship.error){
-                return res.status(friendship.status).json({msg: friendship.msg});
+                return res.status(friendship.status).json({error: friendship.msg});
             }
             await friendship.save();
             return res.json(friendship);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -58,13 +58,13 @@ class FriendshipController {
         try {
             const friendship = await friendshipService.putFriendship({ id, body: friendshipData });
             if (friendship.error) {
-                return res.status(friendship.status).json({ msg: friendship.msg });
+                return res.status(friendship.status).json({ error: friendship.msg });
             }
             return res.json(friendship);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
@@ -74,13 +74,13 @@ class FriendshipController {
         try {
             const friendship = await friendshipService.deleteFriendship({ id });
             if(friendship.error){
-                return res.status(friendship.status).json({msg: friendship.msg});
+                return res.status(friendship.status).json({error: friendship.msg});
             }
             return res.json(friendship);
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                msg: 'Hable con el aministrador'
+                error: 'Hable con el aministrador'
             });
         }
     }
