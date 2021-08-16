@@ -11,8 +11,12 @@ class UserService {
     async getUsers() {
         const users = await User.findAll({
             where: {
-                status: 1
-            }
+                status: 1,
+                role: 'USER'
+            },
+            attributes: [
+                'address', 'age', 'email', 'hobbies', 'id', 'img', 'languages', 'linkedin', 'name', 'studies'
+            ]
         });
         return users;
     }

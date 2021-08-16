@@ -20,6 +20,7 @@ import { FileValidatorDirective } from './shared/directives/form/file-validator.
 import { MeetComponent } from './user/pages/meet/meet.component';
 import { FriendsComponent } from './user/pages/friends/friends.component';
 import { UserDetailsComponent } from './user/pages/user-details/user-details.component';
+import { FriendRequestsComponent } from './user/pages/friend-requests/friend-requests.component';
 
 
 
@@ -35,6 +36,7 @@ import { UserDetailsComponent } from './user/pages/user-details/user-details.com
     FileValueAccessorDirective,
     FileValidatorDirective,
     UserDetailsComponent,
+    FriendRequestsComponent,
   ],
   imports: [
     BrowserModule,

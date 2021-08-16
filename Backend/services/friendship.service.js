@@ -12,6 +12,26 @@ class FriendshipService {
         return friendships;
     }
 
+    async getFriendShipsByUserId({ id }) {
+        const friendships = await Friendship.findAll({
+            where: {
+                accepted: true,
+                id_user: id
+            }
+        });
+        return friendships;
+    }
+
+    async getFriendShipsRequestsByUserId({ id }) {
+        const friendships = await Friendship.findAll({
+            where: {
+                accepted: false,
+                id_user: id
+            }
+        });
+        return friendships;
+    }
+
     async getFriendshipByPK({ id }) {
         const friendship = await Friendship.findByPk(id);
         if(!friendship) {
@@ -25,23 +45,16 @@ class FriendshipService {
     }
 
    
-    async getFriendshipByUser({ id_user }) {
+    async getFriendshipByUser({ id_user, id_friend }) {
         const friendship = await Friendship.findOne({
-            where: { id_user }
+            where: { id_user, id_friend }
         });
-        if(!friendship) {
-            return {
-                error: true,
-                msg: 'No se logró encontrar peticion solicitada',
-                status: 400
-            };
-        }
         return friendship;
     }
 
-    async newFriendship ({ accepted, id_friend, id_user }) {
+    async newFriendship ({ id_friend, id_user }) {
         const friendship = await Friendship.create({
-            accepted, 
+            accepted: false,
             id_user,
             id_friend
         });
