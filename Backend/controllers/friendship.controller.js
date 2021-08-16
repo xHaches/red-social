@@ -17,6 +17,45 @@ class FriendshipController {
         }
     }
 
+    async getFriendShipsByUserId(req, res) {
+        const { id } = req.params;
+        try{
+            const friendships = await friendshipService.getFriendShipsByUserId({ id });
+            return res.json(friendships);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                error: 'Hable con el aministrador'
+            });
+        }
+    }
+
+    async getFriendShipsRequestsByUserId(req, res) {
+        const { id } = req.params;
+        try{
+            const friendships = await friendshipService.getFriendShipsRequestsByUserId({ id });
+            return res.json(friendships);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                error: 'Hable con el aministrador'
+            });
+        }
+    }
+
+    async getFriendShipByUser(req, res) {
+        const { id_user, id_friend } = req.params;
+        try{
+            const friendship = await friendshipService.getFriendshipByUser({ id_user, id_friend });
+            return res.json(friendship);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                error: 'Hable con el aministrador'
+            });
+        }
+    }
+
     async getFriendshipByPK(req, res) {
         const { id } = req.params;
         try {

@@ -14,6 +14,22 @@ class ParamsMiddlewares {
             return res.status(500).json({ error: error.message })
         }
     }
+    async checkIdUser (req, res, next) {
+        try{
+            await Joi.attempt(req.params, paramsDTO.id_user);
+            return next();
+        } catch(error) {
+            return res.status(500).json({ error: error.message })
+        }
+    }
+    async checkIdFriend (req, res, next) {
+        try{
+            await Joi.attempt(req.params, paramsDTO.id_friend);
+            return next();
+        } catch(error) {
+            return res.status(500).json({ error: error.message })
+        }
+    }
 }
 
 

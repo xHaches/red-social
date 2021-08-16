@@ -21,10 +21,24 @@ router.get('/:id', [
     paramsMiddlewares.checkId
 ], friendshipController.getFriendshipByPK);
 
+router.get('/by-user/:id', [
+    authMiddlewares.validateToken,
+    paramsMiddlewares.checkId
+], friendshipController.getFriendShipsByUserId);
+
+router.get('/by-user/requests/:id', [
+    authMiddlewares.validateToken,
+    paramsMiddlewares.checkId
+], friendshipController.getFriendShipsRequestsByUserId);
+
+router.get('/by-user/one/:id_user/:id_friend', [
+    authMiddlewares.validateToken,
+], friendshipController.getFriendShipByUser);
+
 
 router.post('/:id_user/:id_friend', [
     authMiddlewares.validateToken,
-    friendshipMiddlewares.checkPostFriendship
+    // friendshipMiddlewares.checkPostFriendship
 ], friendshipController.newFriendship);
 
 router.put('/:id', [
