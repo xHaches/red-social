@@ -8,27 +8,28 @@ import { State } from '../../../interfaces/state.interface';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-friends',
-  templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.css']
+  selector: 'app-friend-requests',
+  templateUrl: './friend-requests.component.html',
+  styleUrls: ['./friend-requests.component.css']
 })
-export class FriendsComponent implements OnInit {
+export class FriendRequestsComponent implements OnInit {
 
   users: any[] = [];
+  me!: User;
 
   constructor(
-    private userService: UserService,
-    private stateService: StateService,
     private friendsService: FriendsService,
+    private stateService: StateService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
 
     this.stateService.state.pipe(
-      switchMap((state: State) => this.friendsService.getFriendsfromUser(state.user.id))
+      switchMap((state: State) => this.friendsService.getFriendRequestFromUser(state.user.id))
     ).subscribe((users: User[]) => {
-      console.log(users);
+      this.users = users;
+      console.log(this.users);
     });
 
   }
