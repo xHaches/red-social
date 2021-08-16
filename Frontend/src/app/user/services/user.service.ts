@@ -22,4 +22,16 @@ export class UserService {
     );
   }
 
+  getUsersfromUser() {
+    return this.http.get(`${this.baseUrl}/users`).pipe(
+      catchError(err => of(err))
+    );
+  }
+
+  getUserById(id: number) {
+    return this.http.get(`${this.baseUrl}/users/${id}`).pipe(
+      catchError(err => of(err))
+    );
+  }
+
 }

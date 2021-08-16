@@ -24,7 +24,7 @@ export class StateService {
       status: '',
       role: ''
     },
-    token: ''
+    token: '',
   }
 
   model: State = this._inicialState;

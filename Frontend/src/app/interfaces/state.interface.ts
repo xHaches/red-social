@@ -8,4 +8,4 @@ export interface State {
 }
 
 
-export type Action = 'setUser' | 'setToken'
+export type Action = 'setUser' | 'setToken';

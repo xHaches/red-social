@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +17,10 @@ import { ProfileComponent } from './user/pages/profile/profile.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FileValueAccessorDirective } from './shared/directives/form/file-value-accessor.directive';
 import { FileValidatorDirective } from './shared/directives/form/file-validator.directive';
+import { MeetComponent } from './user/pages/meet/meet.component';
+import { FriendsComponent } from './user/pages/friends/friends.component';
+import { UserDetailsComponent } from './user/pages/user-details/user-details.component';
+
 
 
 @NgModule({
@@ -23,15 +30,19 @@ import { FileValidatorDirective } from './shared/directives/form/file-validator.
     RegisterComponent,
     ProfileComponent,
     HeaderComponent,
+    MeetComponent,
+    FriendsComponent,
     FileValueAccessorDirective,
     FileValidatorDirective,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [
     {
