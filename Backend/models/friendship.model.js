@@ -25,6 +25,7 @@ const Friendship = sequelize.define('Friendships', {
     },
     accepted : {
         type: DataTypes.BOOLEAN,
+        default: false,
         allowNull: false,
     },
 
