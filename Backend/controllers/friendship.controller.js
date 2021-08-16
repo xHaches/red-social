@@ -12,7 +12,7 @@ class FriendshipController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -67,7 +67,7 @@ class FriendshipController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -86,7 +86,7 @@ class FriendshipController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -103,7 +103,7 @@ class FriendshipController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -119,7 +119,7 @@ class FriendshipController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }

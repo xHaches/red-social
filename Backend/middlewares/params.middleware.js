@@ -22,6 +22,15 @@ class ParamsMiddlewares {
             return res.status(500).json({ error: error.message })
         }
     }
+    async checkIdTechnology (req, res, next) {
+        try{
+            await Joi.attempt(req.params, paramsDTO.id_technology);
+            return next();
+        } catch(error) {
+            return res.status(500).json({ error: error.message })
+        }
+    }
+     
     async checkIdFriend (req, res, next) {
         try{
             await Joi.attempt(req.params, paramsDTO.id_friend);

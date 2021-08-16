@@ -36,13 +36,38 @@ class QualificationService {
         return qualification;
     }
   
-    //todas las calificaciones por id_user REVISAR
-    // async getQualificationByIdUser({ id }) { 
-    //     const qualification = await Qualification.findAll({
-    //         where: { id_user: id }
-    //     });
-    //     return qualification;
-    // }
+//todas las calificaciones por id_user 
+    async getQualificationByIdUser({ id_user }) { 
+        const qualification = await Qualification.findAll({
+            where: { id_user: id_user }
+        });
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró la busqueda solicitada',
+                status: 400
+            };
+        }
+        return qualification;
+    };
+//Todas las calificaciones de una misma tecnologia de un UNICO USUARIO
+    async getAllQualificationByUser({ id_user, id_technology }) { 
+        const qualification = await Qualification.findAll({
+            where: { 
+                id_user: id_user,
+                id_technology: id_technology, 
+            }
+        });
+        if(!qualification) {
+            return {
+                error: true,
+                msg: 'No se logró la busqueda solicitada',
+                status: 400
+            };
+        }
+        return qualification;
+    };
+
 
     async newQualification ({ stars, id_user, id_technology }) {
         const qualification = await Qualification.create({
