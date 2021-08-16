@@ -13,23 +13,42 @@ class QualificationController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
 
-    // async getQualificationIdUser(req, res) {
-    //     const { id } = req.params;
-    //     try {
-    //         const qualification = await qualificationService.getQualificationIdUser({id});
-    //         return res.json(qualification);
-    //     } catch(err){
-    //         console.log(err);
-    //         return res.status(500).json({
-    //             msg: 'Hable con el aministrador'
-    //         });
-    //     }
-    // }
+    async getQualificationIdUser(req, res) {
+        const { id_user } = req.params;
+        try {
+            const qualification = await qualificationService.getQualificationByIdUser({id_user});
+            if(qualification.error){
+                return res.status(qualification.status).json({error: qualification.msg});
+            }
+            return res.json(qualification);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                msg: 'Hable con el administrador'
+            });
+        }
+    }
+
+    async getAllQualificationByUser(req, res) {
+        const { id_user, id_technology } = req.params;
+        try {
+            const qualification = await qualificationService.getAllQualificationByUser({ id_user, id_technology });
+            if(qualification.error){
+                return res.status(qualification.status).json({error: qualification.msg});
+            }
+            return res.json(qualification);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                msg: 'Hable con el administrador'
+            });
+        }
+    }
 
     async getQualificationByPK(req, res) {
         const { id } = req.params;
@@ -42,7 +61,7 @@ class QualificationController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -60,7 +79,7 @@ class QualificationController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -77,7 +96,7 @@ class QualificationController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
@@ -93,7 +112,7 @@ class QualificationController {
         } catch (err) {
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }

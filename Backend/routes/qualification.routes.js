@@ -14,22 +14,33 @@ router.get('/', [
     authMiddlewares.validateAdminRole,
 ], qualificationController.getQualifications);
 
+//calificaciones por id 
 router.get('/:id', [
-    authMiddlewares.validateToken,
+   authMiddlewares.validateToken,
     paramsMiddlewares.checkId,
 ], qualificationController.getQualificationByPK);
 
-// router.get('/user/:id', [
-//     paramsMiddlewares.checkId
-// ], qualificationController.getQualificationIdUser);
-
-router.post('/:id_user/:id_technology', [
+//todas las calificaciones por usuario
+router.get('/user/:id_user', [
     authMiddlewares.validateToken,
+    paramsMiddlewares.checkIdUser
+], qualificationController.getQualificationIdUser);
+
+// todas las calificaciones de una misma tecnologia de un unico usuario
+router.get('/users/:id_user/:id_technology', [
+    authMiddlewares.validateToken,
+   paramsMiddlewares.checkIdTechnology,
+], qualificationController.getAllQualificationByUser);
+
+//nueva calificacion a una tecnologia de un usuario especifico
+router.post('/:id_user/:id_technology', [
+   authMiddlewares.validateToken,
+    paramsMiddlewares.checkIdTechnology,
     qualificationMiddlewares.checkPostQualification,
 ], qualificationController.newQualification);
 
 router.put('/:id', [
-    authMiddlewares.validateToken,
+   authMiddlewares.validateToken,
     qualificationMiddlewares.checkPutQualification,
     paramsMiddlewares.checkId,
 ], qualificationController.putQualification);
