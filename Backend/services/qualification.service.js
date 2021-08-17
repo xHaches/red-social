@@ -70,6 +70,15 @@ class QualificationService {
 
 
     async newQualification ({ stars, id_user, id_technology }) {
+        const qualificationExists = await Qualification.findOne({
+            where: {
+                id_user,
+                id_technology
+            }
+        });
+        if(qualificationExists) {
+            return await this.putQualification({ id: qualificationExists.id, body: {stars} });
+        }
         const qualification = await Qualification.create({
             stars,
             id_user,

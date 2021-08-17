@@ -8,7 +8,7 @@ class FriendshipService {
         const friendships = await Friendship.findAll({
             include: {
                 model: User,
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
             },
             where: {
                 accepted: true,
@@ -22,7 +22,7 @@ class FriendshipService {
         const friendships = await Friendship.findAll({
             include: {
                 model: User,
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
             },
             where: {
                 accepted: false,
@@ -38,7 +38,7 @@ class FriendshipService {
             include: {
                 model: User,
                 where:{ id: id_friend },
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
             },
             where: { id_user: id_user}
         });
