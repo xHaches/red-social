@@ -11,26 +11,25 @@ const friendshipMiddlewares = new FriendshipMiddlewares();
 const authMiddlewares = new AuthMiddlewares();
 
 
-router.get('/', [
-    authMiddlewares.validateToken,
-    authMiddlewares.validateAdminRole,
-], friendshipController.getFriendships);
 
 router.get('/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
 ], friendshipController.getFriendshipByPK);
 
+// TRAE LA LISTA DE AMISTADES Y SU INFORMACION DE CADA UNO
 router.get('/by-user/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
 ], friendshipController.getFriendShipsByUserId);
 
+// TRAE LAS SOLICITUDES DE AMISTAD Y SU INFORMACION DE CADA UNO
 router.get('/by-user/requests/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
 ], friendshipController.getFriendShipsRequestsByUserId);
 
+//TRAE A UN AMIGO EN ESPECIAL DEL USUARIO ( CON SU INFORMACION)
 router.get('/by-user/one/:id_user/:id_friend', [
     authMiddlewares.validateToken,
 ], friendshipController.getFriendShipByUser);
@@ -38,7 +37,7 @@ router.get('/by-user/one/:id_user/:id_friend', [
 
 router.post('/:id_user/:id_friend', [
     authMiddlewares.validateToken,
-    // friendshipMiddlewares.checkPostFriendship
+    friendshipMiddlewares.checkPostFriendship
 ], friendshipController.newFriendship);
 
 router.put('/:id', [
@@ -51,5 +50,6 @@ router.delete('/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
 ],friendshipController.deleteFriendship)
+
 
 module.exports = router;

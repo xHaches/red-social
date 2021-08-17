@@ -1,19 +1,15 @@
-const { Friendship } = require("../models");
+const { Friendship , User} = require("../models");
 
 
 class FriendshipService {
 
-    async getFriendships() {
-        const friendships = await Friendship.findAll({
-            where: {
-                accepted: true
-            }
-        });
-        return friendships;
-    }
-
+// TRAE LA LISTA DE AMISTADES Y SU INFORMACION DE CADA UNO
     async getFriendShipsByUserId({ id }) {
         const friendships = await Friendship.findAll({
+            include: {
+                model: User,
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+            },
             where: {
                 accepted: true,
                 id_user: id
@@ -21,9 +17,13 @@ class FriendshipService {
         });
         return friendships;
     }
-
+// TRAE LAS SOLICITUDES DE AMISTAD Y SU INFORMACION DE CADA UNO
     async getFriendShipsRequestsByUserId({ id }) {
         const friendships = await Friendship.findAll({
+            include: {
+                model: User,
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+            },
             where: {
                 accepted: false,
                 id_user: id
@@ -31,6 +31,20 @@ class FriendshipService {
         });
         return friendships;
     }
+
+//TRAE A UN AMIGO EN ESPECIAL DEL USUARIO ( CON SU INFORMACION)
+    async getFriendshipByUser({ id_user, id_friend }) {
+        const friendship = await Friendship.findOne({
+            include: {
+                model: User,
+                where:{ id: id_friend },
+                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status']
+            },
+            where: { id_user: id_user}
+        });
+        return friendship;
+    }
+
 
     async getFriendshipByPK({ id }) {
         const friendship = await Friendship.findByPk(id);
@@ -45,13 +59,8 @@ class FriendshipService {
     }
 
    
-    async getFriendshipByUser({ id_user, id_friend }) {
-        const friendship = await Friendship.findOne({
-            where: { id_user, id_friend }
-        });
-        return friendship;
-    }
 
+    
     async newFriendship ({ id_friend, id_user }) {
         const friendship = await Friendship.create({
             accepted: false,

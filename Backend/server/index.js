@@ -4,7 +4,7 @@ const fileUpload = require('express-fileupload');
 const {v2: cloudinary} = require('cloudinary');
 const cloudinaryConfig = require('../cloudinary/config');
 const sequelize = require('../db/connection');
-
+require('../db/associations');
 
 const {
     userRoutes,
