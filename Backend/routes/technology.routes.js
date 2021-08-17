@@ -12,7 +12,6 @@ const authMiddlewares = new AuthMiddlewares();
 
 router.get('/', [
     authMiddlewares.validateToken,
-    authMiddlewares.validateAdminRole
 ], technologyController.getTechnologies);
 
 router.get('/:id', [    

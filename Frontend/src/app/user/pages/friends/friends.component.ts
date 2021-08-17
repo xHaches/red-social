@@ -24,16 +24,16 @@ export class FriendsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    
     this.stateService.state.pipe(
       switchMap((state: State) => this.friendsService.getFriendsfromUser(state.user.id))
-    ).subscribe((users: User[]) => {
-      console.log(users);
+    ).subscribe((friendshipWithUser: any[]) => {
+      this.users = friendshipWithUser.map(item => item.User);
     });
-
   }
 
   viewUser(user: User) {
+    console.log(user);
     this.router.navigate(['/user-details', user.id])
   }
 }
