@@ -18,30 +18,17 @@
             <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" *ngIf="friendship" (click)="deleteFriend()">Eliminar amigo</button>
         </div>
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-            <div class="p-2 w-full" *ngFor="let technology of technologies">
+            <div class="p-2 w-full" *ngFor="let technology of technologies; let i = index">
                 <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                     <div class="flex-grow">
-                        <h2 class="text-gray-900 title-font font-medium">{{ technology.title }}</h2>
-                          <ul class="flex justify-center">
-                              <li>
-                                  <i class="fas fa-star fa-sm text-yellow-500 mr-1"></i>
-                                </li>
-                                <li>
-                                    <i class="fas fa-star fa-sm text-yellow-500 mr-1"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-star fa-sm text-yellow-500 mr-1"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-star fa-sm text-yellow-500 mr-1"></i>
-                                </li>
-                                <li>
-                                    <i class="far fa-star fa-sm text-yellow-500 mr-1"></i>
-                                </li>
-                            </ul>
-                            
-                  </div>
+                      <h2 class="text-gray-900 title-font font-medium">{{ technology.title }}</h2>
+                      <ul class="flex justify-center">
+                          <li *ngFor="let item of technologiesClassIterable[i]; let itemIndex = index">
+                              <i [class]="item.class" (mouseenter)="toggleStar(technologiesClassIterable[i], itemIndex)" (mouseleave)="toggleStar(technologiesClassIterable[i], itemIndex)" (click)="sendQualification(technology.id, itemIndex+1)"></i>
+                          </li>
+                      </ul>
                 </div>
+              </div>
             </div>
           </div>
         </div>

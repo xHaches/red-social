@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { User } from '../../../interfaces/user.interface';
 import { FriendsService } from '../../../shared/services/friends.service';
 import { State } from '../../../interfaces/state.interface';
-import { switchMap } from 'rxjs/operators';
+import { pluck, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-friend-requests',
@@ -15,7 +15,6 @@ import { switchMap } from 'rxjs/operators';
 export class FriendRequestsComponent implements OnInit {
 
   users: any[] = [];
-  me!: User;
 
   constructor(
     private friendsService: FriendsService,
@@ -26,15 +25,15 @@ export class FriendRequestsComponent implements OnInit {
   ngOnInit(): void {
 
     this.stateService.state.pipe(
-      switchMap((state: State) => this.friendsService.getFriendRequestFromUser(state.user.id))
-    ).subscribe((users: User[]) => {
-      this.users = users;
-      console.log(this.users);
+      switchMap((state: State) => this.friendsService.getFriendRequestFromUser(state.user.id)),
+    ).subscribe((friendshipWithUser: any[]) => {
+      this.users = friendshipWithUser.map(item => item.User);
     });
 
   }
 
   viewUser(user: User) {
+    console.log(user);
     this.router.navigate(['/user-details', user.id])
   }
 }

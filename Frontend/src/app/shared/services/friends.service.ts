@@ -28,7 +28,7 @@ export class FriendsService {
   }
   
   getFriendRequestFromUser(id: number) {
-    return this.http.get(`${this.baseUrl}/friendships/by-user/requests/${ id }`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/friendships/by-user/requests/${ id }`).pipe(
       catchError(err => of(err))
     );
   }
