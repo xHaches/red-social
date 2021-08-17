@@ -5,18 +5,8 @@ const friendshipService = new FriendshipService();
 
 class FriendshipController {
     
-    async getFriendships(req, res) {
-        try{
-            const friendship = await friendshipService.getFriendships();
-            return res.json(friendship);
-        } catch(err){
-            console.log(err);
-            return res.status(500).json({
-                error: 'Hable con el administrador'
-            });
-        }
-    }
 
+// TRAE LA LISTA DE AMISTADES Y SU INFORMACION DE CADA UNO
     async getFriendShipsByUserId(req, res) {
         const { id } = req.params;
         try{
@@ -25,11 +15,11 @@ class FriendshipController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
-
+// TRAE LAS SOLICITUDES DE AMISTAD Y SU INFORMACION DE CADA UNO
     async getFriendShipsRequestsByUserId(req, res) {
         const { id } = req.params;
         try{
@@ -38,11 +28,11 @@ class FriendshipController {
         } catch(err){
             console.log(err);
             return res.status(500).json({
-                error: 'Hable con el aministrador'
+                error: 'Hable con el administrador'
             });
         }
     }
-
+//TRAE A UN AMIGO EN ESPECIFICO DEL USUARIO ( CON SU INFORMACION)
     async getFriendShipByUser(req, res) {
         const { id_user, id_friend } = req.params;
         try{
