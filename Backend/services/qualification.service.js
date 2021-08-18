@@ -54,12 +54,6 @@ async getQualificationByIdUser({ id_user }) {
     return qualification;
 };
 
-//sequelize.fn('avg', sequelize.col('stars')), 'avg_stars']
-
-
-
-
-    
 
 
 //Todas las calificaciones de una misma tecnologia
@@ -79,6 +73,7 @@ async getQualificationByIdUser({ id_user }) {
         }
         return qualification;
     };
+
 
 
 //TRAE EL PROMEDIO DE LAS CALIFICACIONES DE TODAS LAS TECNOLOGIAS PARA UN USUARIO
@@ -156,7 +151,7 @@ function mean (qualification){
     console.log(qualification);
     let suma=0;
     const up = qualification.length;
-    for (let i=0; i <=(up); i++ ){
+    for (let i=0; i<(up); i++ ){
         suma = qualification[i].stars + suma;
     }
 
