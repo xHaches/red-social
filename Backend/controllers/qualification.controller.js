@@ -19,9 +19,10 @@ class QualificationController {
     }
 
     async getQualificationIdUser(req, res) {
-        const { id_user } = req.params;
+        let { id_user, id_technologies } = req.params;
+        id_technologies = JSON.parse(id_technologies)
         try {
-            const qualification = await qualificationService.getQualificationByIdUser({id_user});
+            const qualification = await qualificationService.getQualificationByIdUser({id_user, id_technologies});
             if(qualification.error){
                 return res.status(qualification.status).json({error: qualification.msg});
             }
@@ -62,6 +63,22 @@ class QualificationController {
             console.log(err);
             return res.status(500).json({
                 error: 'Hable con el administrador'
+            });
+        }
+    }
+//TRAE EL PROMEDIO DE LAS CALIFICACIONES POR TECNOLOGIA
+    async getMeanQualification(req, res) {
+        const { id_user, id_technology } = req.params;
+        try {
+            const qualification = await qualificationService.getMeanQualification({ id_user, id_technology });
+            if(qualification.error){
+                return res.status(qualification.status).json({error: qualification.msg});
+            }
+            return res.json(qualification);
+        } catch(err){
+            console.log(err);
+            return res.status(500).json({
+                 msg: 'Hable con el administrador'
             });
         }
     }
