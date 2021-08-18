@@ -41,34 +41,17 @@ class QualificationService {
 //todas las calificaciones por id_user 
     async getQualificationByIdUser({ id_user, id_technologies }) {
         
-        const means = await Promise.all(
-            id_technologies.map( id_technology => {
-                console.log(id_technology)
-                console.log(this.getMeanQualification)
-                this.getMeanQualification({id_user: 2, id_technology:2})
-            }
-        )
-        )
-
-        // const qualification = await Qualification.findAll({ 
-        //     include: {
-        //         model: Technology,
-        //         attributes: ['title'],
-        //     },
-        //     where: { id_user: id_user }
-        // }); 
-        console.log(means)
-        return means.map(qualification => {
-            console.log(qualification)
-            return qualification });
+        const means =[]
+        const up= id_technologies.length
+        let i=0
+        for ( i=0; i <(up); i++ ){
+            let id_technology = id_technologies[i]
+            const qualification = await this.getMeanQualification({ id_user: id_user, id_technology });
+            means.push(qualification); 
+        }
+        return means;
     };
 
-//sequelize.fn('avg', sequelize.col('stars')), 'avg_stars']
-
-
-
-
-    
 
 
 //Todas las calificaciones de una misma tecnologia
@@ -92,7 +75,7 @@ class QualificationService {
 
 //TRAE EL PROMEDIO DE LAS CALIFICACIONES DE UNA TECNOLOGIA
     async getMeanQualification({ id_user, id_technology }) { 
-        console.log(id_user, id_technology)
+       
         const qualification = await Qualification.findAll({
             include: {
                 model: Technology,
@@ -110,9 +93,8 @@ class QualificationService {
                 status: 400
             };
         };
-        
         const meanQualificationTechnoly = await mean(qualification);
-        return [meanQualificationTechnoly, qualification];
+        return {meanQualificationTechnoly, qualification};
     };
 
     async newQualification ({ stars, id_user, id_technology }) {
@@ -166,7 +148,7 @@ module.exports = QualificationService;
 function mean (qualification){
     let suma=0;
     const up = qualification.length;
-    for (let i=0; i <(up); i++ ){
+    for (let i=0; i<(up); i++ ){
         suma = qualification[i].stars + suma;
     }
 
