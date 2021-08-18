@@ -5,6 +5,8 @@ const { User, Friendship, Qualification, Technology, } = require("../models");
 
 
 Qualification.hasOne(Technology, {foreignKey: 'id'});
+// Technology.hasOne(Qualification, {foreignKey: 'id_technology'});
+// Technology.hasOne(Qualification, {foreignKey: 'id_technology'});
 //Technology.hasMany(Qualification, {foreignKey: 'id_technology'});
 //Qualification.hasOne(User, {foreignKey: 'id'});
 
