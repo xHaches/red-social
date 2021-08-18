@@ -2,7 +2,8 @@
 const e = require("express");
 const { object } = require("joi");
 const { Qualification, Technology } = require("../models");
-
+const sequelize = require('../db/connection');
+const { QueryTypes } = require('sequelize');
 
 class QualificationService {
 
@@ -39,29 +40,19 @@ class QualificationService {
     }
   
 //todas las calificaciones por id_user 
-    async getQualificationByIdUser({ id_user, id_technologies }) {
-        
-        const means = await Promise.all(
-            id_technologies.map( id_technology => {
-                console.log(id_technology)
-                console.log(this.getMeanQualification)
-                this.getMeanQualification({id_user: 2, id_technology:2})
-            }
-        )
-        )
-
-        // const qualification = await Qualification.findAll({ 
-        //     include: {
-        //         model: Technology,
-        //         attributes: ['title'],
-        //     },
-        //     where: { id_user: id_user }
-        // }); 
-        console.log(means)
-        return means.map(qualification => {
-            console.log(qualification)
-            return qualification });
-    };
+async getQualificationByIdUser({ id_user }) { 
+    const qualification = await Qualification.findAll({
+        where: { id_user: id_user }
+    });
+    if(!qualification) {
+        return {
+            error: true,
+            msg: 'No se logró la busqueda solicitada',
+            status: 400
+        };
+    }
+    return qualification;
+};
 
 //sequelize.fn('avg', sequelize.col('stars')), 'avg_stars']
 
@@ -90,29 +81,18 @@ class QualificationService {
     };
 
 
-//TRAE EL PROMEDIO DE LAS CALIFICACIONES DE UNA TECNOLOGIA
-    async getMeanQualification({ id_user, id_technology }) { 
-        console.log(id_user, id_technology)
-        const qualification = await Qualification.findAll({
-            include: {
-                model: Technology,
-                attributes: ['title'],
-            },
-            where: { 
-                id_user: id_user,
-                id_technology: id_technology, 
-            }
-        });
-        if(!qualification) {
-            return {
-                error: true,
-                msg: 'No se logró la busqueda solicitada',
-                status: 400
-            };
-        };
-        
-        const meanQualificationTechnoly = await mean(qualification);
-        return [meanQualificationTechnoly, qualification];
+//TRAE EL PROMEDIO DE LAS CALIFICACIONES DE TODAS LAS TECNOLOGIAS PARA UN USUARIO
+    async getMeanQualification({ id_user }) { 
+        const qualifications = await sequelize.query(`
+            SELECT avg([stars]) AS [avg_stars], [Qualifications].[id_technology]
+            FROM [Qualifications] LEFT OUTER JOIN [Technologies] ON [Qualifications].[id_technology] = [Technologies].[id] 
+            WHERE [Qualifications].[id_user] = ? GROUP BY [id_technology]
+            `,
+            {
+            replacements: [id_user],
+            type: QueryTypes.SELECT
+            });
+        return qualifications;
     };
 
     async newQualification ({ stars, id_user, id_technology }) {
@@ -173,9 +153,10 @@ class QualificationService {
 module.exports = QualificationService;
 
 function mean (qualification){
+    console.log(qualification);
     let suma=0;
     const up = qualification.length;
-    for (let i=0; i <(up); i++ ){
+    for (let i=0; i <=(up); i++ ){
         suma = qualification[i].stars + suma;
     }
 

@@ -10,6 +10,10 @@ import { FileValidatorDirective } from '../../../shared/directives/form/file-val
 import Swal from 'sweetalert2';
 import { UserService } from '../../services/user.service';
 import { LocalStorageService } from '../../../shared/services/local-storage.service';
+import { TechnologiesService } from '../../../shared/services/technologies.service';
+import { Techonology } from '../../../interfaces/technology.interface';
+import { switchMap } from 'rxjs/operators';
+import { QualificationService } from '../../services/qualification.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,11 +27,31 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private stateService: StateService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private technologiesService: TechnologiesService,
+    private qualificationService: QualificationService
   ) { }
 
   user!: User;
   updateForm!: FormGroup;
+  technologiesClassIterable: any[] = [];
+  technologies: any = [];
+  means: any = [];
+
+
+  toggleStar(itemsArray: any[], itemIndex: number) {
+    itemsArray.forEach(arrItem => {
+      if(arrItem.index <= itemIndex) {
+        arrItem.class = `fas fa-star fa-sm text-yellow-500 mr-1`;
+      }
+    });
+    itemsArray.forEach(arrItem => {
+      if(arrItem.index > itemIndex) {
+        arrItem.class = `far fa-star fa-sm text-yellow-500 mr-1`;
+      }
+    });
+  }
+
 
   // Manejo de imagen
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -56,6 +80,32 @@ export class ProfileComponent implements OnInit {
       img: [''],
     });
 
+    this.technologiesService.getTechnologies().subscribe((technologies: Techonology[]) => {
+      this.technologies = technologies;
+      this.qualificationService.getMeanQualificationsByUser(this.user.id).subscribe(means => {
+        this.means = means;
+        this.technologiesClassIterable = this.technologies.map((technology :Techonology, index: number) => {
+          if(this.means.find((mean: any) => mean.id_technology === technology.id)) {
+            this.means[index].title = technology.title;
+          }
+          return [0,1,2,3,4].map(number => ({
+            title: technology.title,
+            index: number,
+            class: 'far fa-star fa-sm text-yellow-500 mr-1'
+          }));
+        });
+        this.setMeanUserQualifications();
+      });
+    })
+
+
+  }
+
+  setMeanUserQualifications() {
+    // MANEJO DE CALIFICACIONES
+    this.technologiesClassIterable.forEach((technology, index) => {
+      this.toggleStar(technology, this.means[index]?.avg_stars - 1 || -1);
+    });
   }
 
   invalidEmail(): boolean {

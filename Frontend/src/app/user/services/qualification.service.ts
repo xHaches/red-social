@@ -20,4 +20,8 @@ export class QualificationService {
   getQualificationsByUser(id_user: number) {
     return this.http.get(`${this.baseUrl}/qualifications/user/${id_user}`);
   }
+
+  getMeanQualificationsByUser(id_user: number) {
+    return this.http.get(`${this.baseUrl}/qualifications/mean/${id_user}`);
+  }
 }

@@ -21,9 +21,9 @@ router.get('/:id', [
 ], qualificationController.getQualificationByPK);
 
 //todas las calificaciones por usuario ES ESTA
-router.get('/user/:id_user/:id_technologies', [
+router.get('/user/:id_user', [
     authMiddlewares.validateToken,
-    paramsMiddlewares.checkIdUser
+    // paramsMiddlewares.checkIdUser
 ], qualificationController.getQualificationIdUser);
 
 // todas las calificaciones de una misma tecnologia de un unico usuario
@@ -51,8 +51,8 @@ router.delete('/:id', [
 ], qualificationController.deleteQualification);
 
 //TRAE EL PROMEDIO DE LAS CALIFICACIONES DE LAS TECNOLOGIAS
-router.get('/mean/:id_user/:id_technology',[
-    paramsMiddlewares.checkIdTechnology,
+router.get('/mean/:id_user',[
+    // paramsMiddlewares.checkIdTechnology,
 ], qualificationController.getMeanQualification);
 
 module.exports = router;
