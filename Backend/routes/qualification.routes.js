@@ -20,8 +20,8 @@ router.get('/:id', [
     paramsMiddlewares.checkId,
 ], qualificationController.getQualificationByPK);
 
-//todas las calificaciones por usuario
-router.get('/user/:id_user', [
+//todas las calificaciones por usuario ES ESTA
+router.get('/user/:id_user/:id_technologies', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkIdUser
 ], qualificationController.getQualificationIdUser);
@@ -48,6 +48,11 @@ router.put('/:id', [
 router.delete('/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
-], qualificationController.deleteQualification)
+], qualificationController.deleteQualification);
+
+//TRAE EL PROMEDIO DE LAS CALIFICACIONES DE LAS TECNOLOGIAS
+router.get('/mean/:id_user/:id_technology',[
+    paramsMiddlewares.checkIdTechnology,
+], qualificationController.getMeanQualification);
 
 module.exports = router;
