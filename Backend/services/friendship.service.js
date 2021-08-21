@@ -1,48 +1,51 @@
 const { Friendship , User} = require("../models");
+const sequelize = require('../db/connection');
+const { QueryTypes } = require('sequelize');
 
 
 class FriendshipService {
 
 // TRAE LA LISTA DE AMISTADES Y SU INFORMACION DE CADA UNO
     async getFriendShipsByUserId({ id }) {
-        const friendships = await Friendship.findAll({
-            include: {
-                model: User,
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
-            },
-            where: {
-                accepted: true,
-                id_user: id
-            }
+        const friendships = await sequelize.query(`
+        SELECT [Friendships].[id], [Friendships].[id_friend], [Friendships].[id_user], 
+        [Friendships].[accepted], [User].[img], [User].[name], [User].[address], [User].[email], [User].[age], 
+        [User].[studies], [User].[languages], [User].[linkedin], [User].[hobbies], [User].[status], [User].[id] 
+        FROM [Friendships] LEFT OUTER JOIN [Users] AS [User] ON [Friendships].[id_friend] = [User].[id] 
+        WHERE [Friendships].[accepted] = 1 AND [Friendships].[id_user] =  ?;
+        `, {
+            replacements: [id],
+            type: QueryTypes.SELECT
         });
         return friendships;
     }
 // TRAE LAS SOLICITUDES DE AMISTAD Y SU INFORMACION DE CADA UNO
     async getFriendShipsRequestsByUserId({ id }) {
-        const friendships = await Friendship.findAll({
-            include: {
-                model: User,
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
-            },
-            where: {
-                accepted: false,
-                id_user: id
-            }
+        const friendships = await sequelize.query(`
+        SELECT [Friendships].[id], [Friendships].[id_friend], [Friendships].[id_user], 
+        [Friendships].[accepted], [User].[img], [User].[name], [User].[address], [User].[email], [User].[age], 
+        [User].[studies], [User].[languages], [User].[linkedin], [User].[hobbies], [User].[status], [User].[id] 
+        FROM [Friendships] LEFT OUTER JOIN [Users] AS [User] ON [Friendships].[id_friend] = [User].[id] 
+        WHERE [Friendships].[accepted] = 0 AND [Friendships].[id_user] =  ?;
+        `, {
+            replacements: [id],
+            type: QueryTypes.SELECT
         });
+        console.log(friendships);
         return friendships;
     }
 
 //TRAE A UN AMIGO EN ESPECIAL DEL USUARIO ( CON SU INFORMACION)
     async getFriendshipByUser({ id_user, id_friend }) {
-        const friendship = await Friendship.findOne({
-            include: {
-                model: User,
-                where:{ id: id_friend },
-                attributes: ['img','name','address','email','age','studies','languages','linkedin','hobbies','status', 'id']
-            },
-            where: { id_user: id_user}
+        const friendship = await sequelize.query(`
+            SELECT TOP 1 * FROM Users JOIN Friendships ON Users.id = Friendships.id_friend AND Users.[id] = ? 
+            WHERE [Friendships].[id_user] = ?
+        `, {
+            replacements: [id_friend, id_user],
+            type: QueryTypes.SELECT
         });
-        return friendship;
+        console.log(friendship);
+        return friendship[0];
     }
 
 
@@ -80,7 +83,9 @@ class FriendshipService {
 
     async putFriendship({ id, body }) {
         const { accepted } = body;
-        const friendship = await Friendship.findByPk(id);
+        console.log(accepted);
+        const friendship = await Friendship.findOne({where: { id_friend: id}});
+        console.log(friendship);
         if(!friendship) {
             return {
                 error: true,
@@ -94,6 +99,7 @@ class FriendshipService {
 
     async deleteFriendship({ id }) {
         const friendship = await Friendship.findByPk(id);
+        await friendship.destroy();
         if(!friendship) {
             return {
                 error: true,
@@ -101,7 +107,6 @@ class FriendshipService {
                 status: 400
             };
         }
-        await friendship.update({ accepted:false });
         return friendship;
     }
 

@@ -6,7 +6,7 @@ class FriendshipDTO {
         accepted: Joi.boolean().required(),
     });
     put = Joi.object().keys({
-        accepted: Joi.boolean()
+        accepted: Joi.boolean().required()
     });
 }
 

@@ -10,7 +10,8 @@ const authMiddlewares = new AuthMiddlewares();
 
 
 router.post('/', [
-    authMiddlewares.checkEmailAndPassword
+    authMiddlewares.checkEmailAndPassword,
+    authMiddlewares.validateUserExists
 ], authController.login);
 
 

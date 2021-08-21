@@ -113,6 +113,23 @@ class FriendshipController {
             });
         }
     }
+
+    async deleteFriend(req, res) {
+        const { id_friend } = req.params;
+        console.log(id_friend);
+        try {
+            const friendship = await friendshipService.deleteFriendship({ id_friend });
+            if(friendship.error){
+                return res.status(friendship.status).json({error: friendship.msg});
+            }
+            return res.json(friendship);
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({
+                error: 'Hable con el administrador'
+            });
+        }
+    }
 }
 
 module.exports = FriendshipController;
