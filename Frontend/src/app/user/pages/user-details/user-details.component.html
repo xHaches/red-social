@@ -14,8 +14,8 @@
               <p class="text-base"><strong>Estudios:</strong> {{ selectedUser.studies }}</p>
               <a [href]="selectedUser.linkedin" rel="noopener" target="_blank" class="text-indigo-500 inline-flex items-center">Linkedin</a>
             </div>
-            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" *ngIf="!friendship" (click)="sendFriendrequest()">Enviar solicitud</button>
-            <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" *ngIf="friendship" (click)="deleteFriend()">Eliminar amigo</button>
+            <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" *ngIf="!friendship?.accepted" (click)="sendFriendrequest()">Enviar solicitud</button>
+            <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" *ngIf="friendship?.accepted" (click)="deleteFriend()">Eliminar amigo</button>
         </div>
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
             <div class="p-2 w-full" *ngFor="let technology of technologies; let i = index">

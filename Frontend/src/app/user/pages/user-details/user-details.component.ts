@@ -10,6 +10,7 @@ import { FriendsService } from '../../../shared/services/friends.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { QualificationService } from '../../services/qualification.service';
+import { FriendshipWithUser } from '../../../interfaces/friendship.interface';
 
 @Component({
   selector: 'app-user-details',
@@ -20,7 +21,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   selectedUser: any = {};
   technologies: any = [];
-  friendship: any = false;
+  friendship!: FriendshipWithUser;
 
   technologiesClassIterable: any[] = [];
 
@@ -61,8 +62,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       console.log(this.selectedUser);
       this.subscription.add(this.stateService.subscribe((state: State) => {
         this.me = state.user;
-        this.subscription.add(this.friendsService.getFriendFromUser(id, state.user.id).subscribe((friendship: User) => {
+        this.subscription.add(this.friendsService.getFriendFromUser(state.user.id, id).subscribe((friendship: FriendshipWithUser) => {
           this.friendship = friendship;
+          console.log(this.friendship);
         }));
         this.setUserQualifications();
       }));
@@ -106,8 +108,10 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   deleteFriend() {
+    console.log(this.friendship);
     this.subscription.add(
-      this.friendsService.deleteFriend(this.friendship.id).subscribe((resp: any) => {
+      this.friendsService.deleteFriend(this.friendship.id).subscribe((deletedFriendship: FriendshipWithUser) => {
+      this.friendship = deletedFriendship;
       Swal.fire('Eliminado');
     }));
   }

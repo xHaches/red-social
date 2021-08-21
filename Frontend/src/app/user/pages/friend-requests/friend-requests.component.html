@@ -5,14 +5,14 @@
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Solicitudes recibidas.</p>
       </div>
       <div class="flex flex-wrap -m-2">
-        <div class="p-2 lg:w-1/3 md:w-1/2 w-full" *ngFor="let user of (users)">
+        <div class="p-2 lg:w-1/3 md:w-1/2 w-full" *ngFor="let req of (usersRequests)">
           <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4 pointer" [src]="user.img"  (click)="viewUser(user)">
+            <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4 pointer" [src]="req.img"  (click)="viewUser(req)">
             <div class="flex-grow">
-              <h2 class="text-gray-900 title-font font-medium text-center">{{ user.name }}</h2>
-              <p class="text-gray-500 text-center">{{ user.studies }}</p>
-              <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2">Aceptar</button>
-              <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2">Rechazar</button>
+              <h2 class="text-gray-900 title-font font-medium text-center">{{ req.name }}</h2>
+              <p class="text-gray-500 text-center">{{ req.studies }}</p>
+              <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" (click)="accept(req.id)">Aceptar</button>
+              <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full m-2" (click)="reject(req.id)">Rechazar</button>
             </div>
           </div>
         </div>

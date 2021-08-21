@@ -39,8 +39,14 @@ export class FriendsService {
     );
   }
 
-  deleteFriend(id: number) {
-    return this.http.delete(`${this.baseUrl}/friendships/by-user/one/${ id }`).pipe(
+  acceptFriend(id_friend: number, body: any) {
+    return this.http.put(`${this.baseUrl}/friendships/${ id_friend }`, body).pipe(
+      catchError(err => of(err))
+    );
+  }
+
+  deleteFriend(id_friend: number) {
+    return this.http.delete(`${this.baseUrl}/friendships/friend/${ id_friend }`).pipe(
       catchError(err => of(err))
     );
   }
