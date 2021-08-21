@@ -6,6 +6,9 @@ const { AuthDTO } = require("../dto");
 const jwt = require('jsonwebtoken');
 
 const authDTO = new AuthDTO();
+const {AuthService} = require("../services");
+
+const authService = new AuthService();
 
 class AuthMidlewares {
     
@@ -56,6 +59,25 @@ class AuthMidlewares {
             }
             return next();
             
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({
+                msg: 'Hable con el administrador'
+            });
+        }
+    }
+
+    async validateUserExists(req, res, next) {
+        const { email, password } = req.body;
+        console.log(email, password);
+        try {
+            const user = await authService.login({ email, password });
+            if (!user) {
+                return res.status(400).json({
+                    msg: 'Usuario o contraseña incorrectos'
+                });
+            }
+            return next();
         } catch (err) {
             console.log(err);
             return res.status(500).json({

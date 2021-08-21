@@ -9,6 +9,13 @@ const userService = new UserService();
 class AuthService {
     async login ({email, password})  {
         const user = await userService.getUserByEmail({email});
+        if(!user) {
+            return {
+                error: true,
+                msg: 'Email o password incorrectos',
+                status: 400
+            }
+        }
         const validPassword = bcryptjs.compareSync(password+'', user.password);
 
         if(!validPassword) {

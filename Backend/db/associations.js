@@ -14,4 +14,4 @@ Qualification.hasOne(Technology, {foreignKey: 'id'});
 
 Friendship.hasOne(User, {foreignKey: 'id'});
 
-Friendship.hasOne(User, {foreignKey: 'id'});
+// Friendship.hasOne(User, {foreignKey: 'id'});

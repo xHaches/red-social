@@ -33,7 +33,7 @@ router.get('/users/:id_user/:id_technology', [
 ], qualificationController.getAllQualificationByUser);
 
 //nueva calificacion a una tecnologia de un usuario especifico
-router.post('/:id_user/:id_technology', 
+router.post('/:id_user/:id_technology', [
    authMiddlewares.validateToken,
     paramsMiddlewares.checkIdTechnology,
     qualificationMiddlewares.checkPostQualification,

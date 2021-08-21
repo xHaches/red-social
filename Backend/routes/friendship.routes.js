@@ -37,7 +37,7 @@ router.get('/by-user/one/:id_user/:id_friend', [
 
 router.post('/:id_user/:id_friend', [
     authMiddlewares.validateToken,
-    friendshipMiddlewares.checkPostFriendship
+    // friendshipMiddlewares.checkPostFriendship
 ], friendshipController.newFriendship);
 
 router.put('/:id', [
@@ -46,7 +46,7 @@ router.put('/:id', [
     paramsMiddlewares.checkId
 ], friendshipController.putFriendship);
 
-router.delete('/:id', [
+router.delete('/friend/:id', [
     authMiddlewares.validateToken,
     paramsMiddlewares.checkId
 ],friendshipController.deleteFriendship)
