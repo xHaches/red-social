@@ -23,9 +23,6 @@ http-server dist/Frontend
 ```
 
 **Paso 6:** Tener cuenta en `https://cloudinary.com/` y gregar *Cloud name*, *API Key* y *API Secret* a las variables de entorno
-```
-Open with Live Server
-```
 
 ***Documentación:***
 https://app.swaggerhub.com/apis/ChavezCitlalli/Ticket_2/0.0.1
