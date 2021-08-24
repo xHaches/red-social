@@ -1,0 +1,870 @@
+{
+	"info": {
+		"_postman_id": "0a1c611e-64d9-417b-9d91-a79decb1001b",
+		"name": "app red-social",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get user by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjczMzQ0ODUsImRhdGEiOnsiZW1haWwiOiJ6YXlkYUBjb3JyZW8uY29tIiwicGFzcyI6IjEyMzQ1NiJ9LCJpYXQiOjE2MjczMzA4ODV9.345GfNHB4bVMTQ4_WGQaJ-bVbYnpTWVU9UHr_UhCdrk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/citla/Downloads/citlalli.jpg"
+								},
+								{
+									"key": "name",
+									"value": "Citlalli",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Casa",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test14@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "24",
+									"type": "text"
+								},
+								{
+									"key": "studies",
+									"value": "Universidad",
+									"type": "text"
+								},
+								{
+									"key": "languages",
+									"value": "Español, Inglés",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "https://www.linkedin.com/in/citlalli-ch%C3%A1vez-0a8a26172/",
+									"type": "text"
+								},
+								{
+									"key": "hobbies",
+									"value": "Decorar, Jardineria",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/C:/Users/herna/Desktop/angular.png"
+								},
+								{
+									"key": "name",
+									"value": "Luis Mario",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Casa",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test1@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "24",
+									"type": "text"
+								},
+								{
+									"key": "studies",
+									"value": "Universidad",
+									"type": "text"
+								},
+								{
+									"key": "languages",
+									"value": "Español, Inglés",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "https://www.linkedin.com/in/luis-hern%C3%A1ndez-228173189/",
+									"type": "text"
+								},
+								{
+									"key": "hobbies",
+									"value": "Básketbol, Caminar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/11111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"11111"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/111111",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"111111"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJpbWciOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9keXBrcHF4eWgvaW1hZ2UvdXBsb2FkL3YxNjI4OTY5MzgzL3NvY2lhbC1uZXR3b3JrL2l2bGt6ZnV2bzZ6Ym9zYWJkNm5rLnBuZyIsIm5hbWUiOiJDaXRsYWxsaSIsImFkZHJlc3MiOiJDYXNhIiwiZW1haWwiOiJ0ZXN0NUB0ZXN0LmNvbSIsImFnZSI6MjQsInN0dWRpZXMiOiJVbml2ZXJzaWRhZCIsImxhbmd1YWdlcyI6IkVzcGHDsW9sLCBJbmdsw6lzIiwibGlua2VkaW4iOiJodHRwczovL3d3dy5saW5rZWRpbi5jb20vaW4vY2l0bGFsbGktY2glQzMlQTF2ZXotMGE4YTI2MTcyLyIsImhvYmJpZXMiOiJEZWNvcmFyLCBKYXJkaW5lcmlhIiwic3RhdHVzIjoxLCJyb2xlIjoiQURNSU4ifSwiaWF0IjoxNjI5MDQwMjAzLCJleHAiOjE2MjkxMjY2MDN9.Yz4WqlN7zQaJOl0puP5lmWwgdNYvXVOTplSq4pxBilY",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Technology",
+			"item": [
+				{
+					"name": "get technology by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/technologies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"technologies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Technology",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Node.js",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/technologies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"technologies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Technology",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "postman",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/technologies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"technologies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Technology",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/technologies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"technologies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Technologies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/technologies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"technologies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Qualification",
+			"item": [
+				{
+					"name": "get qualifications",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get qualification by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new Qualification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stars",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/2/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"2",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Qualification",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stars",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delate Qualification",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get qualifications by Technology of User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/users/2/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"users",
+								"2",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get mean Qualification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/qualifications/mean/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"qualifications",
+								"mean",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friendship",
+			"item": [
+				{
+					"name": "get Friendships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/friendships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Friendship",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "accepted",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/4/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"4",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "accepted",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delate Friendship",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/friend/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"friend",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get friendships by id_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/by-user/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"by-user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get friendship by id_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/by-user/requests/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"by-user",
+								"requests",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFriend Requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/friendships/by-user/one/4/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"friendships",
+								"by-user",
+								"one",
+								"4",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test5@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJpbWciOiJodHRwczovL3Jlcy5jbG91ZGluYXJ5LmNvbS9keXBrcHF4eWgvaW1hZ2UvdXBsb2FkL3YxNjI5MjI1MzUyL3NvY2lhbC1uZXR3b3JrL3VudWpuYWszZTczd2tpbHk4aTBnLnBuZyIsIm5hbWUiOiJMdWlzIiwiYWRkcmVzcyI6IkRpcmVjY2lvbiAxIiwiZW1haWwiOiJ0ZXN0NUB0ZXN0LmNvbSIsImFnZSI6MjMsInN0dWRpZXMiOiJVbml2ZXJzaWRhZCIsImxhbmd1YWdlcyI6IkVzcGHDsW9sLCBJbmdsw6lzIiwibGlua2VkaW4iOiJodHRwczovL3d3dy5saW5rZWRpbi5jb20vaW4vbHVpcy1oZXJuJUMzJUExbmRlei0yMjgxNzMxODkvIiwiaG9iYmllcyI6IkNhbWluYXIsIExlZXIiLCJzdGF0dXMiOjEsInJvbGUiOiJBRE1JTiJ9LCJpYXQiOjE2MjkzMTIzNjEsImV4cCI6MTYyOTM5ODc2MX0.d5Q8nNvJrlNXj6JqR7AENfWrGkoyOEYl7UJcSV5chtY",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
