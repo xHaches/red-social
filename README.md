@@ -19,6 +19,7 @@ nodemon
 
 **Paso 5:** Dentro de la carpeta *Frontend* Ejecutar el siguiente comando
 ```
+npm i http-server
 http-server dist/Frontend
 ```
 
